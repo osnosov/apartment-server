@@ -1,0 +1,66 @@
+{
+  "name": "apartment-server",
+  "version": "1.0.0",
+  "description": "api for apartment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "db:migrate": "node db/migration.js",
+    "db:seed": "node db/seed.js"
+  },
+  "keywords": [
+    "API",
+    "apartment",
+    "server",
+    "koa",
+    "knex"
+  ],
+  "author": "Oleg Nosov <nosovoleg@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osnosov/apartment-server.git"
+  },
+  "dependencies": {
+    "@koa/cors": "^2.2.2",
+    "bcrypt": "^3.0.0",
+    "dotenv": "^6.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "knex": "^0.15.2",
+    "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^3.3.2",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "sqlite3": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.2.0",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.13.0",
+    "nodemon": "^1.18.3",
+    "prettier": "^1.14.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": true
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "rules": {
+      "no-console": "off",
+      "linebreak-style": [
+        "error",
+        "windows"
+      ]
+    },
+    "env": {
+      "node": true
+    }
+  }
+}
