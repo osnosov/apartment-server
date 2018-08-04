@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const { getUser } = require('../models/user');
 const { createSession, getSession } = require('../models/sessions');
 
-const jwtSecret = process.env.SECRET_JWT;
+const jwtSecret = process.env.SECRET_JWT || 'secret';
 
 passport.use(
   new LocalStrategy(
