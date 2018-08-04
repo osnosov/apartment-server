@@ -1,13 +1,14 @@
 const Router = require('koa-router');
+const passport = require('koa-passport');
 
-const { getUsers } = require('../services/user');
+const { getAllUser } = require('../models/user');
 
 const router = new Router({
   prefix: '/users',
 });
 
-router.get('/', async ctx => {
-  ctx.body = await getUsers();
+router.get('/', passport.authenticate('jwt', { session: false }), async ctx => {
+  ctx.body = await getAllUser();
 });
 
 module.exports = router.routes();

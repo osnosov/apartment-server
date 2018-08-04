@@ -18,6 +18,12 @@ async function migration() {
     t.string('role');
   });
 
+  await db.schema.createTable('sessions', t => {
+    t.increments().primary();
+    t.integer('userId');
+    t.foreign('userId').references('users.id');
+  });
+  
   await db.destroy();
 }
 
