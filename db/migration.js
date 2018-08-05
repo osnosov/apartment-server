@@ -1,4 +1,4 @@
-const db = require('../db')
+const db = require('../db');
 
 async function migration() {
   await db.schema.dropTableIfExists('users');
@@ -18,12 +18,24 @@ async function migration() {
     t.string('role');
   });
 
+  await db.schema.dropTableIfExists('sessions');
   await db.schema.createTable('sessions', t => {
     t.increments().primary();
     t.integer('userId');
     t.foreign('userId').references('users.id');
   });
-  
+
+  await db.schema.dropTableIfExists('customer');
+  await db.schema.createTable('customer', t => {
+    t.increments().primary();
+    t.string('firstName').notNullable();
+    t.string('lastName').notNullable();
+    t.string('phoneNumber')
+      .unique();
+    t.string('email')
+      .unique();
+  });
+
   await db.destroy();
 }
 

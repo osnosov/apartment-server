@@ -25,6 +25,23 @@ async function seed() {
     },
   ]);
 
+  await db('customer').insert([
+    {
+      id: 1,
+      firstName: 'Customer1',
+      lastName: 'Customer1',
+      phoneNumber: '0503333333',
+      email: 'customer1@customer.me',
+    },
+    {
+      id: 2,
+      firstName: 'Customer2',
+      lastName: 'Customer2',
+      phoneNumber: '0504444444',
+      email: 'customer1@customer.me',
+    },
+  ]);
+
   await db.destroy();
 }
 
