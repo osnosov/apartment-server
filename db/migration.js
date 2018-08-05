@@ -52,6 +52,34 @@ async function migration() {
       .index();
   });
 
+  await db.schema.dropTableIfExists('type');
+  await db.schema.createTable('type', t => {
+    t.increments('id').primary();
+    t.text('name').notNullable();
+    t.timestamp('updated_at')
+      .defaultTo(db.fn.now())
+      .index();
+    t.timestamp('created_at')
+      .defaultTo(db.fn.now())
+      .index();
+  });
+
+  await db.schema.dropTableIfExists('apartment');
+  await db.schema.createTable('apartment', t => {
+    t.increments('id').primary();
+    t.string('number').notNullable();
+    t.integer('floor').notNullable();
+    t.integer('type').unsigned().notNullable();
+    t.foreign('type').references('type.id');
+    t.boolean('active').defaultTo(true);
+    t.timestamp('updated_at')
+      .defaultTo(db.fn.now())
+      .index();
+    t.timestamp('created_at')
+      .defaultTo(db.fn.now())
+      .index();
+  });
+
   await db.destroy();
 }
 

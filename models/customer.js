@@ -13,9 +13,7 @@ async function getCustomer(criteria) {
   return customer;
 }
 
-async function update({ criteria, data }) {
-    console.log(criteria)
-    console.log(data)
+async function updateCustomer({ criteria, data }) {
   return db('customer')
     .where(criteria)
     .update(data);
@@ -26,4 +24,5 @@ async function destroyCustomer(criteria) {
     .where(criteria)
     .del();
 }
-module.exports = { createCustomer, getCustomer, update, destroyCustomer };
+
+module.exports = { createCustomer, getCustomer, updateCustomer, destroyCustomer };

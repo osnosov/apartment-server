@@ -42,6 +42,38 @@ async function seed() {
     },
   ]);
 
+  await db('type').insert([
+    {
+      id: 1,
+      name: '1 room',
+    },
+    {
+      id: 2,
+      name: '2 room',
+    },
+  ]);
+
+  await db('apartment').insert([
+    {
+      id: 1,
+      number: 456,
+      floor: 4,
+      type: 1,
+    },
+    {
+      id: 2,
+      number: 536,
+      floor: 5,
+      type: 2,
+    },
+    {
+      id: 3,
+      number: 724,
+      floor: 7,
+      type: 1,
+    },
+  ]);
+
   await db.destroy();
 }
 
