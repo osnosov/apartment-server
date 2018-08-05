@@ -16,6 +16,12 @@ async function migration() {
       .notNullable()
       .unique();
     t.string('role');
+    t.timestamp('updated_at')
+      .defaultTo(db.fn.now())
+      .index();
+    t.timestamp('created_at')
+      .defaultTo(db.fn.now())
+      .index();
   });
 
   await db.schema.dropTableIfExists('sessions');
@@ -23,6 +29,12 @@ async function migration() {
     t.increments().primary();
     t.integer('userId');
     t.foreign('userId').references('users.id');
+    t.timestamp('updated_at')
+      .defaultTo(db.fn.now())
+      .index();
+    t.timestamp('created_at')
+      .defaultTo(db.fn.now())
+      .index();
   });
 
   await db.schema.dropTableIfExists('customer');
@@ -30,10 +42,14 @@ async function migration() {
     t.increments().primary();
     t.string('firstName').notNullable();
     t.string('lastName').notNullable();
-    t.string('phoneNumber')
-      .unique();
-    t.string('email')
-      .unique();
+    t.string('phoneNumber').unique();
+    t.string('email').unique();
+    t.timestamp('updated_at')
+      .defaultTo(db.fn.now())
+      .index();
+    t.timestamp('created_at')
+      .defaultTo(db.fn.now())
+      .index();
   });
 
   await db.destroy();

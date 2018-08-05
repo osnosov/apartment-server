@@ -38,7 +38,7 @@ async function seed() {
       firstName: 'Customer2',
       lastName: 'Customer2',
       phoneNumber: '0504444444',
-      email: 'customer1@customer.me',
+      email: 'customer2@customer.me',
     },
   ]);
 
