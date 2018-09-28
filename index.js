@@ -11,6 +11,7 @@ const router = require('./routes');
 
 const app = new Koa();
 
+const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
 
 app.use(async (ctx, next) => {
@@ -42,8 +43,8 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.on('error', (err, ctx) => console.log(`Server error ${err}, ${ctx}`));
 
-const server = app.listen(PORT, () =>
-  console.log(`Server started on port ${PORT || ''}`)
+const server = app.listen(PORT, HOST, () =>
+  console.log(`Listen on: ${process.env.HOST}:${process.env.PORT}`)
 );
 
 module.exports = server;
