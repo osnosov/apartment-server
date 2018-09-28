@@ -6,6 +6,7 @@ const bodyParser = require('koa-bodyparser');
 const staticFiles = require('koa-static');
 
 const passport = require('./services/password');
+const acl = require('./services/acl');
 const router = require('./routes');
 
 const app = new Koa();
@@ -32,6 +33,8 @@ app.use(async (ctx, next) => {
 app.use(cors()).use(bodyParser());
 
 app.use(passport.initialize());
+
+app.use(acl.middleware());
 
 app.use(staticFiles('public'));
 
