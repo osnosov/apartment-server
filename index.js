@@ -39,4 +39,8 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.on('error', (err, ctx) => console.log(`Server error ${err}, ${ctx}`));
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT || ''}`));
+const server = app.listen(PORT, () =>
+  console.log(`Server started on port ${PORT || ''}`)
+);
+
+module.exports = server;

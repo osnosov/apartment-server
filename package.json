@@ -4,10 +4,12 @@
   "description": "api for apartment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
     "dev": "nodemon index.js",
     "db:migrate": "node db/migration.js",
-    "db:seed": "node db/seed.js"
+    "db:seed": "node db/seed.js",
+    "test": "node_modules/.bin/ava tests/**/*.test.js --verbose",
+    "test:watch": "npm run test -- --watch"
   },
   "keywords": [
     "API",
@@ -38,12 +40,14 @@
     "sqlite3": "^4.0.2"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
     "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
     "nodemon": "^1.18.3",
-    "prettier": "^1.14.0"
+    "prettier": "^1.14.0",
+    "supertest": "^3.3.0"
   },
   "prettier": {
     "singleQuote": true,
