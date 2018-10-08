@@ -1,17 +1,15 @@
-import test from 'ava';
-
+const test = require('ava');
 const supertest = require('supertest');
-const server = require('./../index.js');
 
-let request;
+const app = require('./../index.js');
 
-test.before(() => (request = supertest(server)));
+const request = supertest(app);
 
 test('Get 404 on undefined endpoint', async t => {
   const res = await request.get('/404');
   t.is(res.body.status, 'error');
   t.is(res.statusCode, 404);
   t.is(res.body.status, 'error');
-  t.is(res.body.message, 'Page not found');
+  t.is(res.body.message, 'Page not foundd');
   t.pass();
 });
