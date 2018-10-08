@@ -19,14 +19,15 @@ app.use(async (ctx, next) => {
     await next();
     const status = ctx.status || 404;
     if (status === 404) {
-      ctx.throw(404);
+      ctx.throw(404, 'Page not found');
     }
   } catch (err) {
+    console.log(err.status, err.message);
     ctx.status = err.status || 500;
-    if (ctx.status === 404) {
-      ctx.body = { status: 'error', message: 'Page not found' };
-    } else {
+    if (ctx.status === 500) {
       ctx.body = { status: 'error', message: 'Other error' };
+    } else {
+      ctx.body = { status: 'error', message: err.message };
     }
   }
 });

@@ -8,13 +8,11 @@ async function migration() {
       .notNullable()
       .unique();
     t.string('username').notNullable();
-    t.string('password');
+    t.string('password').notNullable();
     t.string('recoveryToken');
     t.string('firstName').notNullable();
     t.string('lastName').notNullable();
-    t.string('phoneNumber')
-      .notNullable()
-      .unique();
+    t.string('phoneNumber').notNullable();
     t.string('role');
     t.timestamp('updated_at')
       .defaultTo(db.fn.now())
@@ -69,7 +67,9 @@ async function migration() {
     t.increments('id').primary();
     t.string('number').notNullable();
     t.integer('floor').notNullable();
-    t.integer('type').unsigned().notNullable();
+    t.integer('type')
+      .unsigned()
+      .notNullable();
     t.foreign('type').references('type.id');
     t.boolean('active').defaultTo(true);
     t.timestamp('updated_at')

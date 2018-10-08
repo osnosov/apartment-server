@@ -23,6 +23,16 @@ async function seed() {
       password: bcrypt.hashSync('test', 10),
       role: 'manager',
     },
+    {
+      id: 3,
+      email: 'user@demo.me',
+      username: 'User',
+      firstName: 'User',
+      lastName: 'User',
+      phoneNumber: '0502222222',
+      password: bcrypt.hashSync('test', 10),
+      role: 'user',
+    },
   ]);
 
   await db('customer').insert([
