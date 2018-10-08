@@ -11,6 +11,7 @@ const acl = new Roles({
   },
 });
 
+/* eslint-disable consistent-return */
 acl.use('access manager page', async ctx => {
   if (ctx.state.user.role === 'manager') {
     return true;
@@ -22,5 +23,6 @@ acl.use(async ctx => {
     return true;
   }
 });
+/* eslint-enable consistent-return */
 
 module.exports = acl;
