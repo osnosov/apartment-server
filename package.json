@@ -58,7 +58,7 @@
   },
   "prettier": {
     "singleQuote": true,
-    "trailingComma": true
+    "trailingComma": "es5"
   },
   "eslintConfig": {
     "extends": [
