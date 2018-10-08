@@ -7,20 +7,14 @@ module.exports = {
     useNullAsDefault: true,
     debug: true,
   },
-
-  staging: {
-    client: 'postgresql',
+  test: {
+    client: 'sqlite3',
     connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password',
+      filename: './test.sqlite',
     },
-    pool: {
-      min: 2,
-      max: 10,
-    },
+    useNullAsDefault: true,
+    debug: true,
   },
-
   production: {
     client: 'postgresql',
     connection: {
