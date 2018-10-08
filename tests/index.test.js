@@ -10,6 +10,6 @@ test('Get 404 on undefined endpoint', async t => {
   t.is(res.body.status, 'error');
   t.is(res.statusCode, 404);
   t.is(res.body.status, 'error');
-  t.is(res.body.message, 'Page not foundd');
+  t.is(res.body.message, 'Page not found');
   t.pass();
 });
