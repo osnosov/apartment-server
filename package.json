@@ -9,7 +9,10 @@
     "db:migrate": "node db/migration.js",
     "db:seed": "node db/seed.js",
     "test": "node_modules/.bin/ava tests/**/*.test.js --verbose",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "precommit": "pretty-quick --staged && lint-staged && npm run test"
   },
   "keywords": [
     "API",
@@ -46,8 +49,11 @@
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.13.0",
+    "husky": "^1.1.1",
+    "lint-staged": "^7.3.0",
     "nodemon": "^1.18.3",
     "prettier": "^1.14.0",
+    "pretty-quick": "^1.7.0",
     "supertest": "^3.3.0"
   },
   "prettier": {
@@ -69,5 +75,16 @@
     "env": {
       "node": true
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
