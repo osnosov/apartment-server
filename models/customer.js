@@ -1,28 +1,41 @@
 const db = require('../db');
 
 async function createCustomer(data) {
-  return db('customer')
-    .insert(data);
+  const id = await db('customer').insert(data);
+  return id;
+}
+
+async function getAllCustomer() {
+  const customers = await db('customer').select();
+  return customers;
 }
 
 async function getCustomer(criteria) {
   const customer = await db('customer')
     .select()
     .where(criteria)
-    .first()
+    .first();
   return customer;
 }
 
 async function updateCustomer({ criteria, data }) {
-  return db('customer')
+  const status = await db('customer')
     .where(criteria)
     .update(data);
+  return status;
 }
 
 async function destroyCustomer(criteria) {
-  await db('customer')
+  const status = await db('customer')
     .where(criteria)
     .del();
+  return status;
 }
 
-module.exports = { createCustomer, getCustomer, updateCustomer, destroyCustomer };
+module.exports = {
+  createCustomer,
+  getAllCustomer,
+  getCustomer,
+  updateCustomer,
+  destroyCustomer,
+};
