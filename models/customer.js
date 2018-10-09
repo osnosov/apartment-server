@@ -1,7 +1,7 @@
 const db = require('../db');
 
 async function createCustomer(data) {
-  const id = await db('customer').insert(data);
+  const [id] = await db('customer').insert(data);
   return id;
 }
 
