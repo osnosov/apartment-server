@@ -1,7 +1,7 @@
 const db = require('../db');
 
 async function createType(data) {
-  const id = await db('type').insert(data);
+  const [id] = await db('type').insert(data);
   return id;
 }
 
