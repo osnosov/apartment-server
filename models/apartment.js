@@ -1,7 +1,7 @@
 const db = require('../db');
 
 async function createApartment(data) {
-  const id = await db('apartment').insert(data);
+  const [id] = await db('apartment').insert(data);
   return id;
 }
 
