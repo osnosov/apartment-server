@@ -1,7 +1,13 @@
 const db = require('../db');
 
 async function createType(data) {
-  return db('type').insert(data);
+  const id = await db('type').insert(data);
+  return id;
+}
+
+async function getAllType() {
+  const types = await db('type').select();
+  return types;
 }
 
 async function getType(criteria) {
@@ -13,15 +19,17 @@ async function getType(criteria) {
 }
 
 async function updateType({ criteria, data }) {
-  return db('type')
+  const status = await db('type')
     .where(criteria)
     .update(data);
+  return status;
 }
 
 async function destroyType(criteria) {
-  await db('type')
+  const status = await db('type')
     .where(criteria)
     .del();
+  return status;
 }
 
-module.exports = { createType, getType, updateType, destroyType };
+module.exports = { createType, getAllType, getType, updateType, destroyType };
