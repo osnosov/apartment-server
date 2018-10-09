@@ -1,9 +1,9 @@
 const db = require('../db');
 
 async function createSession(userId) {
-  return db('sessions')
-    .insert({ userId })
-    .then(([id]) => id);
+  const [id] = await db('sessions').insert({ userId });
+  console.log(id);
+  return id;
 }
 
 async function getSession(criteria) {
@@ -14,10 +14,11 @@ async function getSession(criteria) {
   return sessions;
 }
 
-async function destroySessionsByUserId(userId) {
-  await db('sessions')
-    .where({ userId })
+async function destroySessionsByUserId(criteria) {
+  const status = await db('sessions')
+    .where(criteria)
     .del();
+  return status;
 }
 
 module.exports = { createSession, getSession, destroySessionsByUserId };

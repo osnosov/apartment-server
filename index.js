@@ -22,7 +22,6 @@ app.use(async (ctx, next) => {
       ctx.throw(404, 'Page not found');
     }
   } catch (err) {
-    console.log(err.status, err.message);
     ctx.status = err.status || 500;
     if (ctx.status === 500) {
       ctx.body = { status: 'error', message: 'Other error' };

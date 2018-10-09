@@ -65,7 +65,7 @@ router.post('/login', async (ctx, next) => {
 router.post('/logout', async (ctx, next) => {
   await passport.authenticate('jwt', async (err, user) => {
     if (user) {
-      await destroySessionsByUserId(user.id);
+      await destroySessionsByUserId({ userId: user.id });
       ctx.body = { status: 'success', message: 'Logout successful' };
     } else {
       ctx.throw(401, 'Unauthorized.');
