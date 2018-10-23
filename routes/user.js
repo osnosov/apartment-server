@@ -34,9 +34,21 @@ router.get(
 );
 
 router.get(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  ctx => {
+    ctx.body = {
+      status: 'success',
+      message: 'get user success',
+      data: ctx.state.user,
+    };
+  }
+);
+
+router.get(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  acl.can('access manager page'),
+  acl.can('access user profile'),
   async ctx => {
     const { id } = ctx.params;
     try {

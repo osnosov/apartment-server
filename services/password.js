@@ -22,8 +22,10 @@ passport.use(
         if (!user || !bcrypt.compareSync(password, user.password)) {
           return done(null, false);
         }
+        const userId = user.id;
         const sessionId = await createSession(user.id);
         const payload = {
+          userId,
           sessionId,
         };
         const token = await jwt.sign(payload, jwtSecret);
