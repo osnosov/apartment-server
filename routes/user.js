@@ -22,10 +22,21 @@ router.get(
   async ctx => {
     try {
       const users = await getAllUser();
+      const data = users.map(user => ({
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phoneNumber: user.phoneNumber,
+        role: user.role,
+        updated_at: user.updated_at,
+        created_at: user.created_at,
+      }));
       ctx.body = {
         status: 'success',
         message: 'get users success',
-        data: users,
+        data,
       };
     } catch (err) {
       ctx.throw(400, 'Encountered an error');
@@ -37,10 +48,13 @@ router.get(
   '/profile',
   passport.authenticate('jwt', { session: false }),
   ctx => {
+    const { user } = ctx.state;
+    delete user.password;
+    delete user.recoveryToken;
     ctx.body = {
       status: 'success',
       message: 'get user success',
-      data: ctx.state.user,
+      data: user,
     };
   }
 );
@@ -53,6 +67,8 @@ router.get(
     const { id } = ctx.params;
     try {
       const user = await getUser({ id });
+      delete user.password;
+      delete user.recoveryToken;
       ctx.body = {
         status: 'success',
         message: 'get user success',
