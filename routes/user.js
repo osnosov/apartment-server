@@ -152,6 +152,12 @@ router.put(
     const { id } = ctx.params;
     const user = ctx.request.body;
     try {
+      if (user.password) {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(user.password, salt);
+        user.password = hash;
+      }
+
       const status = await updateUser({ criteria: { id }, data: user });
       if (status) {
         ctx.status = 200;
