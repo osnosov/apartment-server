@@ -151,6 +151,11 @@ router.put(
   async ctx => {
     const { id } = ctx.params;
     const user = ctx.request.body;
+
+    if (id === String(ctx.state.user.id) && user.role !== ctx.state.user.role) {
+      ctx.throw(403, 'You can not upgrade your role.');
+    }
+
     try {
       if (user.password) {
         const salt = await bcrypt.genSalt(10);
