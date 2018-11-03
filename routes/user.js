@@ -157,22 +157,33 @@ router.put(
     }
 
     try {
-      if (user.password) {
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(user.password, salt);
-        user.password = hash;
-      }
+      const { email } = user;
+      const findUser = await getUser({ email });
 
-      const status = await updateUser({ criteria: { id }, data: user });
-      if (status) {
-        ctx.status = 200;
+      if (findUser && String(findUser.id) !== id) {
+        ctx.status = 400;
         ctx.body = {
-          status: 'success',
-          message: 'User update.',
+          status: 'error',
+          message: 'A user with this email already exists.',
         };
       } else {
-        ctx.status = 400;
-        ctx.body = { status: 'error', message: 'User does not exist.' };
+        if (user.password) {
+          const salt = await bcrypt.genSalt(10);
+          const hash = await bcrypt.hash(user.password, salt);
+          user.password = hash;
+        }
+
+        const status = await updateUser({ criteria: { id }, data: user });
+        if (status) {
+          ctx.status = 200;
+          ctx.body = {
+            status: 'success',
+            message: 'User update.',
+          };
+        } else {
+          ctx.status = 400;
+          ctx.body = { status: 'error', message: 'User does not exist.' };
+        }
       }
     } catch (err) {
       ctx.throw(400, 'Encountered an error');
