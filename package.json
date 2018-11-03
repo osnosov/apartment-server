@@ -11,8 +11,7 @@
     "test": "node_modules/.bin/ava tests/**/*.test.js --verbose",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "precommit": "pretty-quick --staged && lint-staged && npm run test"
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [
     "API",
@@ -78,12 +77,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run precommit"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
+      "pretty-quick --staged",
+      "npm run lint:fix",
       "git add"
     ]
   }
